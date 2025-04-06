@@ -1,0 +1,121 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #eef4ff;
+    color: #333;
+}
+
+/* Projects Section */
+.projects {
+    padding: 80px 20px;
+    background: linear-gradient(to bottom right, #e3f2fd, #f8faff);
+    text-align: center;
+}
+
+.projects h2 {
+    font-size: 40px;
+    color: #1e90ff;
+    margin-bottom: 50px;
+    font-weight: 700;
+    position: relative;
+}
+
+.projects h2::after {
+    content: "";
+    width: 80px;
+    height: 4px;
+    background: #1e90ff;
+    display: block;
+    margin: 10px auto 0;
+    border-radius: 2px;
+}
+
+.project-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* Project Card */
+.project-card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    transform: scale(1);
+}
+
+.project-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Image Styling */
+.project-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    transition: transform 0.4s ease;
+}
+
+.project-card:hover img {
+    transform: scale(1.05);
+}
+
+/* Project Text */
+.project-card h3 {
+    font-size: 24px;
+    color: #1e90ff;
+    margin-bottom: 10px;
+}
+
+.project-card p {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+/* Button */
+.project-card a {
+    text-decoration: none;
+    display: inline-block;
+    background-color: #1e90ff;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 30px;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.project-card a:hover {
+    background-color: #187bcd;
+    transform: scale(1.05);
+}
+
+/* Responsive Text on Small Devices */
+@media (max-width: 768px) {
+    .projects h2 {
+        font-size: 32px;
+    }
+
+    .project-card h3 {
+        font-size: 20px;
+    }
+
+    .project-card p {
+        font-size: 15px;
+    }
+}
