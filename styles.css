@@ -116,10 +116,13 @@ body {
 
 /* Hamburger Menu */
 .hamburger {
-    display: none;
+    display: none; /* Hidden by default on larger screens */
     flex-direction: column;
     gap: 6px;
     cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
 }
 
 .hamburger span {
@@ -160,6 +163,7 @@ body {
     }
 
     .nav-links {
+        display: none; /* Hide nav-links by default on small screens */
         position: absolute;
         top: 100%;
         left: 0;
@@ -168,13 +172,12 @@ body {
         flex-direction: column;
         gap: 20px;
         padding: 20px 0;
-        transform: translateY(-100%);
-        transition: transform 0.3s ease;
+        transition: all 0.3s ease; /* Smooth transition */
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     }
 
     .nav-links.active {
-        transform: translateY(0);
+        display: flex; /* Show nav-links when active */
     }
 
     .nav-links li {
@@ -193,7 +196,7 @@ body {
     }
 
     .hamburger {
-        display: flex;
+        display: flex; /* Show hamburger menu on small screens */
     }
 
     .logo-img {
