@@ -196,12 +196,13 @@ body {
         top: 100%;
         left: 0;
         width: 100%;
-        background: #fff;
+        background: var(--bg-card); /* Adapt to theme */
         flex-direction: column;
         gap: 20px;
         padding: 20px 0;
         transition: all 0.3s ease; /* Smooth transition */
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .nav-links.active {
@@ -1311,8 +1312,28 @@ body {
         width: 100px;
     }
 
-    .project-card, .achievement-item {
+    .project-item, .achievement-item, .project-card-grid {
         width: 100%;
+    }
+    
+    .section {
+        padding: 60px 20px; /* Reduced padding for mobile */
+    }
+    
+    .hero {
+        padding-top: 140px; /* Ensure content clears navbar */
+    }
+
+    /* Force visibility on mobile to prevent JS issues */
+    .skill-card, 
+    .project-item, 
+    .project-card-grid,
+    .achievement-item,
+    .service-card,
+    .contact-item {
+        opacity: 1 !important;
+        transform: none !important;
+        animation: none !important;
     }
 }
 
