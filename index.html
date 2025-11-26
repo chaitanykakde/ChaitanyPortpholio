@@ -6,7 +6,8 @@
     <title>Chaitany Kakde - Portfolio</title>
     <link rel="icon" type="image/png" href="images/logo.png"> <!-- Favicon for browser tab -->
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="grid-projects.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 <!-- Navigation -->
@@ -28,6 +29,9 @@
         <li><a href="#services">Services</a></li>
         <li><a href="#contact">Contact</a></li>
     </ul>
+    <div class="theme-toggle" id="theme-toggle">
+        🌙
+    </div>
     <div class="hamburger">
         <span></span>
         <span></span>
@@ -38,9 +42,9 @@
 <section id="home" class="section hero">
     <div class="hero-content">
         <img src="images/profile.jpg" alt="Chaitany's Profile" class="profile-img">
-        <h1 class="animated-text">Hi, <span id="dynamic-text">I'm Chaitany Kakde</span></h1>
-        <p class="subtitle">Android Developer | Full Stack Developer<br>Skilled in Kotlin, Java, Jetpack Compose, and Firebase</p>
-        <a href="Chaitany_Resume_Orignal.pdf" download="Chaitany_Resume_Orignal.pdf" class="cv-btn">Download CV</a>
+        <h1 class="animated-text">Hi, I'm <span id="dynamic-text">Chaitany Kakde</span></h1>
+        <p class="subtitle">🏆 5x National Hackathon Winner | 💡2x Ideathon Winner | Technical Head @C³Cube<br>Android Developer | Kotlin, Java, Python | Jetpack Compose, XML | MVVM | Retrofit, SQLite | UI/UX (Figma)</p>
+        <a href="Chaitany_Resume_2025.pdf" download="Chaitany_Resume_2025.pdf" class="cv-btn">Download CV</a>
         <div class="social-links">
             <a href="https://www.linkedin.com/in/chaitany-kakde-2a3ba62a8/" target="_blank">
                 <img src="images/linkedin.jpeg" alt="LinkedIn" class="social-icon">
@@ -89,6 +93,39 @@
     <div class="timeline-container">
         <div class="timeline-item">
             <div class="timeline-content">
+                <h3>Software Developer Intern</h3>
+                <p class="institution">Koshpal</p>
+                <p class="duration">Sep 2025 - Present</p>
+                <p class="details">
+                    Remote · Mobile Application Development, Android and +3 skills
+                </p>
+            </div>
+            <div class="timeline-line"></div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-content">
+                <h3>Technical Head</h3>
+                <p class="institution">C³ {C-CuBe}</p>
+                <p class="duration">Apr 2025 - Present</p>
+                <p class="details">
+                    Chhatrapati Sambhajinagar, Maharashtra, India · On-site · Technical Project Leadership
+                </p>
+            </div>
+            <div class="timeline-line"></div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-content">
+                <h3>Member for Android Development</h3>
+                <p class="institution">C³ {C-CuBe}</p>
+                <p class="duration">Sep 2024 - Apr 2025</p>
+                <p class="details">
+                    Debugging, Mobile Application Development and +1 skill
+                </p>
+            </div>
+            <div class="timeline-line"></div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-content">
                 <h3>Software Engineer, Intern</h3>
                 <p class="institution">Mountreach Solutions, Amravati, India</p>
                 <p class="duration">08/2023 - 01/2024</p>
@@ -133,6 +170,10 @@
         <div class="skill-card skill-animate"><img src="images/sqlimg.png" alt="SQL"><br><span>SQL</span></div>
         <div class="skill-card skill-animate"><img src="images/googlecloudimg.png" alt="GCS"><br><span>GCS</span></div>
         <div class="skill-card skill-animate"><img src="images/github.png" alt="GitHub"><br><span>GitHub</span></div>
+        <div class="skill-card skill-animate"><img src="images/swift.jpeg" alt="Swift"><br><span>Swift</span></div>
+        <div class="skill-card skill-animate"><img src="images/nodejs.png" alt="Node.js"><br><span>Node.js</span></div>
+        <div class="skill-card skill-animate"><img src="images/swiftui.jpeg" alt="SwiftUI"><br><span>SwiftUI</span></div>
+        <div class="skill-card skill-animate"><img src="images/mongodb.png" alt="MongoDB"><br><span>MongoDB</span></div>
     </div>
 </section>
 
@@ -142,41 +183,156 @@
 <section id="projects" class="section">
     <h2>Projects</h2>
     <div class="projects-container">
-        <div class="project-card left-slide">
-            <img src="images/agewell.jpg" alt="AgeWell">
-            <h3>AGEWELL - Elder Care App</h3>
-            <p>Health monitoring app with SOS alerts, medication tracking, and real-time hospital mapping using FCM, Firebase, and OpenStreetMap API.</p>
-            <a href="https://github.com/vishal-bhutekar21/Age-well-Elder-Care" target="_blank" class="btn">View on GitHub</a>
+        <!-- Expense Tracker Project -->
+        <div class="project-item" data-project="expense-tracker">
+            <div class="project-header">
+                <div class="project-info">
+                    <h3>Expense Tracker - VivaahVerse</h3>
+                    <div class="project-tags">
+                        <span class="project-tag">Android (Kotlin)</span>
+                        <span class="project-tag">Jetpack Compose</span>
+                        <span class="project-tag">Node.js</span>
+                        <span class="project-tag">Material 3</span>
+                    </div>
+                    <p>A Premium Fintech-styled Expense Tracker application featuring a modern "Midnight Emerald" dark theme. Built with Jetpack Compose for the UI and a Node.js/Express backend. Includes secure authentication, glassmorphism dashboard, dynamic analytics charts, and seamless transaction management.</p>
+                </div>
+                <div class="project-links">
+                    <a href="https://github.com/chaitanykakde/VivaahVerse-Chaitnay-Task" target="_blank" class="btn">View on GitHub</a>
+                </div>
+            </div>
+            <div class="project-gallery">
+                <img src="images/expense_tracker/login.jpeg" class="project-gallery-img" alt="Login Screen">
+                <img src="images/expense_tracker/register.jpeg" class="project-gallery-img" alt="Registration Screen">
+                <img src="images/expense_tracker/home.jpeg" class="project-gallery-img" alt="Dashboard">
+                <img src="images/expense_tracker/add_transaction.jpeg" class="project-gallery-img" alt="Add Transaction">
+                <img src="images/expense_tracker/transactions.jpeg" class="project-gallery-img" alt="Transaction List">
+                <img src="images/expense_tracker/breakdown.jpeg" class="project-gallery-img" alt="Analytics">
+                <img src="images/expense_tracker/logout.jpeg" class="project-gallery-img" alt="Logout">
+            </div>
         </div>
-        <div class="project-card right-slide">
-            <img src="images/carbonview.jpg" alt="Carbon View">
-            <h3>CARBON VIEW - Carbon Footprint Tracker</h3>
-            <p>Calculates emissions from manual entries, CSV files, and IoT devices with real-time data and industry dashboard.</p>
-            <a href="https://github.com/chaitanykakde/Carbon-View-App" target="_blank" class="btn">View on GitHub</a>
+
+        <!-- Other Projects (Refactored to new layout) -->
+        <div class="project-item" data-project="agewell">
+            <div class="project-header">
+                <div class="project-info">
+                    <h3>AGEWELL - Elder Care App</h3>
+                    <div class="project-tags">
+                        <span class="project-tag">Android</span>
+                        <span class="project-tag">Firebase</span>
+                        <span class="project-tag">OpenStreetMap API</span>
+                    </div>
+                    <p>Health monitoring app with SOS alerts, medication tracking, and real-time hospital mapping using FCM and Firebase.</p>
+                </div>
+                <div class="project-links">
+                    <a href="https://github.com/vishal-bhutekar21/Age-well-Elder-Care" target="_blank" class="btn">View on GitHub</a>
+                </div>
+            </div>
+            <div class="project-gallery">
+                <img src="images/agewell/1.jpeg" class="project-gallery-img" alt="Connect With Elders">
+                <img src="images/agewell/2.jpeg" class="project-gallery-img" alt="Home Screen">
+                <img src="images/agewell/3.jpeg" class="project-gallery-img" alt="BMI Calculator">
+                <img src="images/agewell/4.jpeg" class="project-gallery-img" alt="Workout Tracker">
+                <img src="images/agewell/5.jpeg" class="project-gallery-img" alt="Checkup Schedule">
+                <img src="images/agewell/6.jpeg" class="project-gallery-img" alt="Emergency Contact">
+                <img src="images/agewell/7.jpeg" class="project-gallery-img" alt="Medical Stock">
+            </div>
         </div>
-        <div class="project-card left-slide">
-            <img src="images/policebharti.jpg" alt="Police Bharti">
-            <h3>POLICE BHARTI - Exam Preparation App</h3>
-            <p>Study app with quizzes, materials, and a Meta chatbot, using Firebase for real-time sync and authentication.</p>
-            <a href="https://github.com/KaranBankar/Police-Bharti" target="_blank" class="btn">View on GitHub</a>
+
+        <div class="project-item" data-project="carbonview">
+            <div class="project-header">
+                <div class="project-info">
+                    <h3>CARBON VIEW - Footprint Tracker</h3>
+                    <div class="project-tags">
+                        <span class="project-tag">IoT Integration</span>
+                        <span class="project-tag">Data Analytics</span>
+                    </div>
+                    <p>Calculates emissions from manual entries, CSV files, and IoT devices with real-time data and industry dashboard.</p>
+                </div>
+                <div class="project-links">
+                    <a href="https://github.com/chaitanykakde/Carbon-View-App" target="_blank" class="btn">View on GitHub</a>
+                </div>
+            </div>
+            <div class="project-gallery">
+                <img src="images/carbonview/1.jpeg" class="project-gallery-img" alt="Manage Devices">
+                <img src="images/carbonview/2.jpeg" class="project-gallery-img" alt="Dashboard Overview">
+                <img src="images/carbonview/3.jpeg" class="project-gallery-img" alt="Carbon Footprint">
+                <img src="images/carbonview/4.jpeg" class="project-gallery-img" alt="Vehicle Report">
+                <img src="images/carbonview/5.jpeg" class="project-gallery-img" alt="Device Stats">
+                <img src="images/carbonview/6.jpeg" class="project-gallery-img" alt="Community">
+                <img src="images/carbonview/7.jpeg" class="project-gallery-img" alt="Emission Calc">
+                <img src="images/carbonview/8.jpeg" class="project-gallery-img" alt="Community Post">
+                <img src="images/carbonview/9.jpeg" class="project-gallery-img" alt="Emissions Dashboard">
+            </div>
         </div>
-        <div class="project-card right-slide">
-            <img src="images/SGGS.jpg" alt="SGGSIE&T">
-            <h3>SGGSIE&T - Paperless College App</h3>
-            <p>Secure election system, health & leave automation, budget tracking, encrypted chat, and admin dashboard.</p>
-            <a href="https://github.com/KaranBankar/SGGSIE-T" target="_blank" class="btn">View on GitHub</a>
+
+        <div class="project-item" data-project="policebharti">
+            <div class="project-header">
+                <div class="project-info">
+                    <h3>POLICE BHARTI - Exam Prep</h3>
+                    <div class="project-tags">
+                        <span class="project-tag">Educational</span>
+                        <span class="project-tag">Meta Chatbot</span>
+                    </div>
+                    <p>Study app with quizzes, materials, and a Meta chatbot, using Firebase for real-time sync and authentication.</p>
+                </div>
+                <div class="project-links">
+                    <a href="https://github.com/KaranBankar/Police-Bharti" target="_blank" class="btn">View on GitHub</a>
+                </div>
+            </div>
+            <div class="project-gallery">
+                <img src="images/policebharti/1.jpeg" class="project-gallery-img" alt="Home Screen">
+                <img src="images/policebharti/2.jpeg" class="project-gallery-img" alt="Subject Wise MCQs">
+                <img src="images/policebharti/3.jpeg" class="project-gallery-img" alt="Syllabus">
+                <img src="images/policebharti/4.jpeg" class="project-gallery-img" alt="Test">
+                <img src="images/policebharti/5.jpeg" class="project-gallery-img" alt="Question Papers">
+            </div>
         </div>
-        <div class="project-card left-slide">
-            <img src="images/servify.JPG" alt="Servify">
-            <h3>SERVIFY - Service Provider App</h3>
-            <p>Real-time service booking with location-based recommendations and secure authentication.</p>
-            <a href="https://github.com/KaranBankar/Servify" target="_blank" class="btn">View on GitHub</a>
-        </div>
-        <div class="project-card right-slide">
-            <img src="images/geca.jpg" alt="GECCS">
-            <h3>GECCS - Attendance and Assignments App</h3>
-            <p>Real-time Attendance Reporting and Assignment Submission App for Students and Notices by faculty.</p>
-            <a href="https://github.com/chaitanykakde/CSMSS-Poly" target="_blank" class="btn">View on GitHub</a>
+
+        <div class="projects-grid-wrapper">
+            <div class="project-card-grid">
+                <img src="images/SGGS.jpg" alt="SGGS App" class="project-card-grid-img">
+                <div class="project-card-grid-info">
+                    <h3>SGGSIE&T - Paperless College</h3>
+                    <div class="project-tags">
+                        <span class="project-tag">Admin Dashboard</span>
+                        <span class="project-tag">Automation</span>
+                    </div>
+                    <p>Secure election system, health & leave automation, budget tracking, encrypted chat, and admin dashboard.</p>
+                    <div class="project-links">
+                        <a href="https://github.com/KaranBankar/SGGSIE-T" target="_blank" class="btn">View on GitHub</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card-grid">
+                <img src="images/servify.JPG" alt="Servify App" class="project-card-grid-img">
+                <div class="project-card-grid-info">
+                    <h3>SERVIFY - Service Provider</h3>
+                    <div class="project-tags">
+                        <span class="project-tag">Service Booking</span>
+                        <span class="project-tag">Location Based</span>
+                    </div>
+                    <p>Real-time service booking with location-based recommendations and secure authentication.</p>
+                    <div class="project-links">
+                        <a href="https://github.com/KaranBankar/Servify" target="_blank" class="btn">View on GitHub</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card-grid">
+                <img src="images/geca.jpg" alt="GECCS App" class="project-card-grid-img">
+                <div class="project-card-grid-info">
+                    <h3>GECCS - Attendance App</h3>
+                    <div class="project-tags">
+                        <span class="project-tag">Academic</span>
+                        <span class="project-tag">Real-time DB</span>
+                    </div>
+                    <p>Real-time Attendance Reporting and Assignment Submission App for Students and Notices by faculty.</p>
+                    <div class="project-links">
+                        <a href="https://github.com/chaitanykakde/CSMSS-Poly" target="_blank" class="btn">View on GitHub</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
@@ -185,7 +341,7 @@
 <section id="achievements" class="section">
     <h2>Achievements</h2>
     <div class="achievements-container">
-        <div class="achievement-item left-slide">
+        <div class="achievement-item">
             <span class="achievement-number">01</span>
             <img src="images/iitgoa.JPG" alt="IIT Goa Hackathon" class="achievement-img">
             <div class="achievement-content">
@@ -193,7 +349,7 @@
                 <p>Winner at Hackathon organized by IIT Goa</p>
             </div>
         </div>
-        <div class="achievement-item right-slide">
+        <div class="achievement-item">
             <span class="achievement-number">02</span>
             <img src="images/sggsnanded.JPG" alt="HackFusion’25" class="achievement-img">
             <div class="achievement-content">
@@ -201,7 +357,7 @@
                 <p>Winner at SGGSIE&T Nanded Hackathon</p>
             </div>
         </div>
-        <div class="achievement-item left-slide">
+        <div class="achievement-item">
             <span class="achievement-number">03</span>
             <img src="images/innovo.JPG" alt="Innovo Hackathon" class="achievement-img">
             <div class="achievement-content">
@@ -209,7 +365,7 @@
                 <p>Winner at Shri Sant Gajanan Maharaj College of Engineering</p>
             </div>
         </div>
-        <div class="achievement-item right-slide">
+        <div class="achievement-item">
             <span class="achievement-number">04</span>
             <img src="images/wings.jpg" alt="Wings Hackathon" class="achievement-img">
             <div class="achievement-content">
@@ -217,7 +373,7 @@
                 <p>Government College of Engineering Aurangabad</p>
             </div>
         </div>
-        <div class="achievement-item left-slide">
+        <div class="achievement-item">
             <span class="achievement-number">05</span>
             <img src="images/amravati.jpg" alt="National Project Competition" class="achievement-img">
             <div class="achievement-content">
@@ -225,12 +381,20 @@
                 <p>Developed AgeWell App at Prof. Ram Meghe Institute</p>
             </div>
         </div>
-        <div class="achievement-item right-slide">
+        <div class="achievement-item">
             <span class="achievement-number">06</span>
             <img src="images/ideathon7.jpg" alt="Ideathon 7.0" class="achievement-img">
             <div class="achievement-content">
                 <h3>🏆 3rd Place - Ideathon 7.0</h3>
                 <p>Ankur Incubation Center, GECA</p>
+            </div>
+        </div>
+        <div class="achievement-item">
+            <span class="achievement-number">07</span>
+            <img src="images/ideathon_8.0.png" alt="IDEATHON 8.0" class="achievement-img">
+            <div class="achievement-content">
+                <h3>🏆 1st Prize - IDEATHON 8.0</h3>
+                <p>National Level Idea Competition organized by AnkurGECA Incubation Centre Foundation & Entrepreneurship Development Club, Government College of Engineering, Aurangabad.</p>
             </div>
         </div>
     </div>

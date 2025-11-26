@@ -40,65 +40,51 @@ window.addEventListener('scroll', () => {
     } else {
         navbar.classList.remove('scrolled');
     }
-
-    // Animate project cards when in view
-    const projectsSection = document.getElementById('projects');
-    const projectCards = document.querySelectorAll('.project-card');
-    const projectsTop = projectsSection.offsetTop - window.innerHeight / 2;
-    const projectsBottom = projectsTop + projectsSection.offsetHeight;
-
-    if (window.pageYOffset >= projectsTop && window.pageYOffset <= projectsBottom) {
-        projectCards.forEach((card, index) => {
-            setTimeout(() => {
-                card.classList.add('visible');
-            }, index * 100); // Staggered animation
-        });
-    } else {
-        projectCards.forEach(card => {
-            card.classList.remove('visible');
-        });
-    }
-
-    // Animate achievement cards when in view
-    const achievementsSection = document.getElementById('achievements');
-    const achievementCards = document.querySelectorAll('.achievement-item');
-    const achievementsTop = achievementsSection.offsetTop - window.innerHeight / 2;
-    const achievementsBottom = achievementsTop + achievementsSection.offsetHeight;
-
-    if (window.pageYOffset >= achievementsTop && window.pageYOffset <= achievementsBottom) {
-        achievementCards.forEach((card, index) => {
-            setTimeout(() => {
-                card.classList.add('visible');
-            }, index * 100); // Staggered animation
-        });
-    } else {
-        achievementCards.forEach(card => {
-            card.classList.remove('visible');
-        });
-    }
 });
 
-// Animate skill cards with Intersection Observer
-const skillsSection = document.getElementById('skills');
-const skillCards = document.querySelectorAll('.skill-card');
+// Helper function for Intersection Observer
+function setupIntersectionObserver(sectionId, itemClass, threshold = 0.2) {
+    const section = document.getElementById(sectionId);
+    const items = document.querySelectorAll(itemClass);
 
-const skillsObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            skillCards.forEach((card, index) => {
-                card.classList.remove('visible'); // Reset animation
-                void card.offsetWidth; // Trigger reflow
-                setTimeout(() => {
-                    card.classList.add('visible'); // Reapply animation
-                }, index * 100); // Staggered effect
+    if (section && items.length > 0) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    items.forEach((item, index) => {
+                        // Only add visible class if not already added to prevent re-animation flicker
+                        if (!item.classList.contains('visible')) {
+                            setTimeout(() => {
+                                item.classList.add('visible');
+                            }, index * 100); // Staggered delay
+                        }
+                    });
+                    // Optional: Unobserve after triggering if you want it to animate only once
+                    // observer.unobserve(section); 
+                } 
+                // Uncomment else block if you want repeated animations on scroll up/down
+                /* else {
+                    items.forEach(item => {
+                        item.classList.remove('visible');
+                    });
+                } */
             });
-        }
-    });
-}, {
-    threshold: 0.3 // Trigger when 30% of the section is visible
-});
+        }, {
+            threshold: threshold
+        });
 
-skillsObserver.observe(skillsSection);
+        observer.observe(section);
+    }
+}
+
+// Setup observers for different sections
+setupIntersectionObserver('projects', '.project-item');
+setupIntersectionObserver('projects', '.project-card-grid'); // Observe new grid cards
+setupIntersectionObserver('achievements', '.achievement-item');
+setupIntersectionObserver('skills', '.skill-card', 0.3);
+setupIntersectionObserver('services', '.service-card');
+setupIntersectionObserver('contact', '.contact-item');
+
 // Hamburger menu toggle
 const hamburger = document.querySelector('.hamburger');
 const navLinks = document.querySelector('.nav-links');
@@ -109,7 +95,95 @@ if (hamburger && navLinks) {
     });
 }
 
-// Fullscreen Image Modal
+// Project Image Modal Logic
+const projectCards = document.querySelectorAll('.project-item[data-project]');
+const projectModal = document.createElement('div');
+projectModal.classList.add('modal');
+projectModal.id = 'project-modal';
+projectModal.innerHTML = `
+    <span class="close-btn project-close-btn">×</span>
+    <div class="modal-content-scroll">
+        <!-- Images will be injected here -->
+    </div>
+`;
+document.body.appendChild(projectModal);
+
+const projectModalContent = projectModal.querySelector('.modal-content-scroll');
+const projectCloseBtn = projectModal.querySelector('.project-close-btn');
+
+projectCards.forEach(card => {
+    card.addEventListener('click', function(e) {
+        // Prevent opening modal if clicking the GitHub button or if clicking inside the gallery (optional, but user might want to expand from gallery too)
+        // Let's allow clicking anywhere on the card except the button to open the full modal
+        if(e.target.classList.contains('btn')) return;
+
+        const projectId = this.getAttribute('data-project');
+        let images = [];
+
+        // Logic to fetch images based on projectId
+        if (projectId === 'expense-tracker') {
+             images = [
+                'images/expense_tracker/login.jpeg',
+                'images/expense_tracker/register.jpeg',
+                'images/expense_tracker/home.jpeg',
+                'images/expense_tracker/add_transaction.jpeg',
+                'images/expense_tracker/transactions.jpeg',
+                'images/expense_tracker/breakdown.jpeg',
+                'images/expense_tracker/logout.jpeg'
+            ];
+        } else if (projectId === 'agewell') {
+            images = [
+                'images/agewell/1.jpeg',
+                'images/agewell/2.jpeg',
+                'images/agewell/3.jpeg',
+                'images/agewell/4.jpeg',
+                'images/agewell/5.jpeg',
+                'images/agewell/6.jpeg',
+                'images/agewell/7.jpeg'
+            ];
+        } else if (projectId === 'carbonview') {
+            images = [
+                'images/carbonview/1.jpeg',
+                'images/carbonview/2.jpeg',
+                'images/carbonview/3.jpeg',
+                'images/carbonview/4.jpeg',
+                'images/carbonview/5.jpeg',
+                'images/carbonview/6.jpeg',
+                'images/carbonview/7.jpeg',
+                'images/carbonview/8.jpeg',
+                'images/carbonview/9.jpeg'
+            ];
+        } else if (projectId === 'policebharti') {
+            images = [
+                'images/policebharti/1.jpeg',
+                'images/policebharti/2.jpeg',
+                'images/policebharti/3.jpeg',
+                'images/policebharti/4.jpeg',
+                'images/policebharti/5.jpeg'
+            ];
+        }
+
+        if (images.length > 0) {
+            projectModalContent.innerHTML = images.map(src => 
+                `<img src="${src}" class="project-detail-img" alt="Project Screenshot">`
+            ).join('');
+            
+            projectModal.style.display = 'flex';
+        }
+    });
+});
+
+projectCloseBtn.addEventListener('click', () => {
+    projectModal.style.display = 'none';
+});
+
+projectModal.addEventListener('click', (e) => {
+    if (e.target === projectModal) {
+        projectModal.style.display = 'none';
+    }
+});
+
+// Fullscreen Image Modal (Achievements)
 const modal = document.getElementById('image-modal');
 const modalImg = document.getElementById('modal-image');
 const closeBtn = document.querySelector('.close-btn');
@@ -122,35 +196,43 @@ achievementImages.forEach(img => {
     });
 });
 
-closeBtn.addEventListener('click', function() {
-    modal.style.display = 'none';
-});
-
-modal.addEventListener('click', function(e) {
-    if (e.target === modal) {
+if (closeBtn) {
+    closeBtn.addEventListener('click', function() {
         modal.style.display = 'none';
-    }
-});
+    });
+}
+
+if (modal) {
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
+}
 
 // Dynamic Text Changing
 const dynamicText = document.getElementById('dynamic-text');
 const roles = [
-    "I'm Chaitany Kakde",
-    "I'm an App Developer",
-    "I'm a Web Developer",
-    "I'm a UI/UX Designer",
-    "I'm a Unit Tester",
-    "I'm a Game Developer",
-    "I'm a Prototype Designer"
+    "Chaitany Kakde",
+    "a 5x National Hackathon Winner 🏆",
+    "a 2x Ideathon Winner 💡",
+    "Technical Head @C³Cube",
+    "an Android Developer",
+    "an iOS Developer",
+    "a Full Stack Developer",
+    "a UI/UX Designer",
+    "a Unit Tester"
 ];
 let index = 0;
 
 function changeText() {
-    dynamicText.style.animation = 'none';
-    void dynamicText.offsetWidth;
-    dynamicText.textContent = roles[index];
-    dynamicText.style.animation = 'fadeInOut 3s ease-in-out';
-    index = (index + 1) % roles.length;
+    if (dynamicText) {
+        dynamicText.style.animation = 'none';
+        void dynamicText.offsetWidth;
+        dynamicText.textContent = roles[index];
+        dynamicText.style.animation = 'fadeInOut 3s ease-in-out';
+        index = (index + 1) % roles.length;
+    }
 }
 
 changeText();
@@ -158,8 +240,31 @@ setInterval(changeText, 3000);
 
 window.addEventListener('load', function () {
     const loaderWrapper = document.querySelector('.loader-wrapper');
-    loaderWrapper.classList.add('hidden');
-    setTimeout(() => {
-        loaderWrapper.style.display = 'none';
-    }, 500);
+    if (loaderWrapper) {
+        loaderWrapper.classList.add('hidden');
+        setTimeout(() => {
+            loaderWrapper.style.display = 'none';
+        }, 500);
+    }
 });
+
+// Theme Toggle Logic
+const themeToggle = document.getElementById('theme-toggle');
+const htmlElement = document.documentElement;
+const savedTheme = localStorage.getItem('theme') || 'dark';
+
+htmlElement.setAttribute('data-theme', savedTheme);
+updateThemeIcon(savedTheme);
+
+themeToggle.addEventListener('click', () => {
+    const currentTheme = htmlElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    
+    htmlElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    updateThemeIcon(newTheme);
+});
+
+function updateThemeIcon(theme) {
+    themeToggle.textContent = theme === 'light' ? '🌙' : '☀️';
+}
