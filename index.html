@@ -1,491 +1,604 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chaitany Kakde - Portfolio</title>
-    <link rel="icon" type="image/png" href="images/logo.png"> <!-- Favicon for browser tab -->
+    <meta name="description" content="Chaitany Kakde — Android / Mobile Engineer. National hackathon winner building real Android products with Kotlin and Jetpack Compose.">
+    <title>Chaitany Kakde — Android / Mobile Engineer</title>
+    <link rel="icon" type="image/jpeg" href="images/logo.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="grid-projects.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script>
+        (function () {
+            try {
+                var theme = localStorage.getItem('theme');
+                if (theme === 'dark' || theme === 'light') {
+                    document.documentElement.setAttribute('data-theme', theme);
+                } else {
+                    document.documentElement.setAttribute('data-theme', 'light');
+                }
+            } catch (e) {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
 </head>
 <body>
-<!-- Navigation -->
-<nav class="navbar">
-        <div class="logo">
-            <a href="#home">
-                <img src="images/logo.jpg" alt="" class="logo-img">
-               
-            </a>
-            <span class="logo-text">Chaitany Kakde</span>
-        </div>
-    <ul class="nav-links">
-        <li><a href="#home">Home</a></li>
-        <li><a href="#education">Education</a></li>
-        <!-- <li><a href="#experience">Experience</a></li> -->
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#achievements">Achievements</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#contact">Contact</a></li>
-    </ul>
-    <div class="theme-toggle" id="theme-toggle">
-        🌙
-    </div>
-    <div class="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
-</nav>
-<!-- Home Section -->
-<section id="home" class="section hero">
-    <div class="hero-content">
-        <img src="images/profile.jpg" alt="Chaitany's Profile" class="profile-img">
-        <h1 class="animated-text">Hi, I'm <span id="dynamic-text">Chaitany Kakde</span></h1>
-        <p class="subtitle">🏆 5x National Hackathon Winner | 💡2x Ideathon Winner | Technical Head @C³Cube<br>Android Developer | Kotlin, Java, Python | Jetpack Compose, XML | MVVM | Retrofit, SQLite | UI/UX (Figma)</p>
-        <a href="Chaitany_Resume_2025.pdf" download="Chaitany_Resume_2025.pdf" class="cv-btn">Download CV</a>
-        <div class="social-links">
-            <a href="https://www.linkedin.com/in/chaitany-kakde-2a3ba62a8/" target="_blank">
-                <img src="images/linkedin.jpeg" alt="LinkedIn" class="social-icon">
-            </a>
-            <a href="https://github.com/chaitanykakde" target="_blank">
-                <img src="images/github.png" alt="GitHub" class="social-icon">
-            </a>
-            <a href="https://www.instagram.com/chaitanyk_07/" target="_blank">
-                <img src="images/insta.jpeg" alt="Instagram" class="social-icon">
-            </a>
-            <a href="https://unstop.com/user/yourprofile" target="_blank">
-                <img src="images/unstopimg.png" alt="Unstop" class="social-icon">
-            </a>
-        </div>
-    </div>
-</section>
+    <a class="skip-link" href="#main">Skip to content</a>
 
-<!-- Education Section -->
-<section id="education" class="section">
-    <h2>Education</h2>
-    <div class="timeline-container">
-        <div class="timeline-item">
-            <div class="timeline-content">
-                <h3>Bachelor of Technology: Computer Science and Engineering</h3>
-                <p class="institution">Government College of Engineering, Chhatrapati Sambhajinagar, India</p>
-                <p class="duration">07/2024 – 06/2027 (Pursuing)</p>
-                <p class="details">SGPA: 9.2</p>
+    <header class="site-header">
+        <div class="header-inner">
+            <a class="wordmark" href="#home">Chaitany Kakde</a>
+
+            <nav class="nav" id="site-nav" aria-label="Primary">
+                <ul class="nav-list">
+                    <li><a href="#work">Work</a></li>
+                    <li><a href="#achievements">Achievements</a></li>
+                    <li><a href="#experience">Experience</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#education">Education</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <a class="btn btn-resume" href="Chaitany_Resume_2025.pdf" download="Chaitany_Resume_2025.pdf">Resume</a>
+                <button type="button" class="icon-btn" id="theme-toggle" aria-label="Switch to dark theme">
+                    <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                        <circle cx="12" cy="12" r="4"></circle>
+                        <path d="M12 3v2M12 19v2M5 12H3M21 12h-2M6.2 6.2l1.4 1.4M16.4 16.4l1.4 1.4M6.2 17.8l1.4-1.4M16.4 7.6l1.4-1.4"></path>
+                    </svg>
+                    <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                        <path d="M21 14.5A8.5 8.5 0 1 1 9.5 3 7 7 0 0 0 21 14.5z"></path>
+                    </svg>
+                </button>
+                <button type="button" class="icon-btn menu-toggle" id="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+                    <span class="menu-toggle-bar" aria-hidden="true"></span>
+                    <span class="menu-toggle-bar" aria-hidden="true"></span>
+                </button>
             </div>
-            <div class="timeline-line"></div>
         </div>
-        <div class="timeline-item">
-            <div class="timeline-content">
-                <h3>Diploma: Computer Engineering</h3>
-                <p class="institution">Government Polytechnic Ambad, Maharashtra, India</p>
-                <p class="duration">06/2021 – 06/2024 (Completed)</p>
-                <p class="details">Grade: 9.3</p>
-            </div>
-            <div class="timeline-line"></div>
-        </div>
+    </header>
+
+    <div class="mobile-nav" id="mobile-nav" hidden>
+        <nav class="mobile-nav-panel" aria-label="Mobile">
+            <ul class="mobile-nav-list">
+                <li><a href="#work">Work</a></li>
+                <li><a href="#achievements">Achievements</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="Chaitany_Resume_2025.pdf" download="Chaitany_Resume_2025.pdf">Download Resume</a></li>
+            </ul>
+        </nav>
     </div>
-</section>
 
-<!-- Experience Section -->
-<section id="experience" class="section">
-    <h2>Experience</h2>
-    <div class="timeline-container">
-        <div class="timeline-item">
-            <div class="timeline-content">
-                <h3>Software Developer Intern</h3>
-                <p class="institution">Koshpal</p>
-                <p class="duration">Sep 2025 - Present</p>
-                <p class="details">
-                    Remote · Mobile Application Development, Android and +3 skills
-                </p>
-            </div>
-            <div class="timeline-line"></div>
-        </div>
-        <div class="timeline-item">
-            <div class="timeline-content">
-                <h3>Technical Head</h3>
-                <p class="institution">C³ {C-CuBe}</p>
-                <p class="duration">Apr 2025 - Present</p>
-                <p class="details">
-                    Chhatrapati Sambhajinagar, Maharashtra, India · On-site · Technical Project Leadership
-                </p>
-            </div>
-            <div class="timeline-line"></div>
-        </div>
-        <div class="timeline-item">
-            <div class="timeline-content">
-                <h3>Member for Android Development</h3>
-                <p class="institution">C³ {C-CuBe}</p>
-                <p class="duration">Sep 2024 - Apr 2025</p>
-                <p class="details">
-                    Debugging, Mobile Application Development and +1 skill
-                </p>
-            </div>
-            <div class="timeline-line"></div>
-        </div>
-        <div class="timeline-item">
-            <div class="timeline-content">
-                <h3>Software Engineer, Intern</h3>
-                <p class="institution">Mountreach Solutions, Amravati, India</p>
-                <p class="duration">08/2023 - 01/2024</p>
-                <p class="details">
-                    Developed Android apps using Java, Kotlin, Jetpack Compose, and MVVM Architecture. Worked with Firebase for real-time sync and notifications. Designed UI/UX with Material Design principles. Integrated APIs (Retrofit, Volley), Location Manager, and SMS services. Implemented TensorFlow Lite for on-device ML and managed storage permissions. Engineered file handling features like PDF generation, Excel processing, and JSON parsing.
-                </p>
-            </div>
-            <div class="timeline-line"></div>
-        </div>
-        <div class="timeline-item">
-            <div class="timeline-content">
-                <h3>Android Developer, Training</h3>
-                <p class="institution">Mountreach Solutions, Amravati, India</p>
-                <p class="duration">05/2023 - 07/2023</p>
-                <p class="details">
-                    Explored Android SDK, local databases (SQLite, Room DB), and UI development with XML. Learned Activity Lifecycle, Fragments, and UI Components. Gained hands-on experience with API integration, Location Manager, and Android Studio’s file structure. Developed Android applications to strengthen core development and debugging techniques.
-                </p>
-            </div>
-            <div class="timeline-line"></div>
-        </div>
-    </div>
-</section>
-
-<!-- Skills Section -->
-<section id="skills" class="section">
-    <h2>Skills</h2>
-    <div class="skills-container">
-        <div class="skill-card skill-animate"><img src="images/appdev.png" alt="App Dev"><br><span>App Dev</span></div>
-        <div class="skill-card skill-animate"><img src="images/java.png" alt="Java"><br><span>Java</span></div>
-        <div class="skill-card skill-animate"><img src="images/kotlin.jpeg" alt="Kotlin"><br><span>Kotlin</span></div>
-        <div class="skill-card skill-animate"><img src="images/python.png" alt="Python"><br><span>Python</span></div>
-        <div class="skill-card skill-animate"><img src="images/javascript.png" alt="JavaScript"><br><span>JavaScript</span></div>
-        <div class="skill-card skill-animate"><img src="images/android.png" alt="Android"><br><span>Android</span></div>
-        <div class="skill-card skill-animate"><img src="images/jetpack.png" alt="Jetpack Compose"><br><span>Jetpack Compose</span></div>
-        <div class="skill-card skill-animate"><img src="images/restapilogo.png" alt="Rest APIs"><br><span>Rest APIs</span></div>
-        
-        <div class="skill-card skill-animate"><img src="images/figmaimg.png" alt="Figma"><br><span>Figma</span></div>
-        <div class="skill-card skill-animate"><img src="images/postmanimg.png" alt="Postman"><br><span>Postman</span></div>
-        <div class="skill-card skill-animate"><img src="images/firebaseimg.jpeg" alt="Firebase"><br><span>Firebase</span></div>
-        <div class="skill-card skill-animate"><img src="images/xamppimg.png" alt="Xampp"><br><span>Xampp</span></div>
-        <div class="skill-card skill-animate"><img src="images/awsimg.png" alt="AWS"><br><span>AWS</span></div>
-        <div class="skill-card skill-animate"><img src="images/sqlimg.png" alt="SQL"><br><span>SQL</span></div>
-        <div class="skill-card skill-animate"><img src="images/googlecloudimg.png" alt="GCS"><br><span>GCS</span></div>
-        <div class="skill-card skill-animate"><img src="images/github.png" alt="GitHub"><br><span>GitHub</span></div>
-        <div class="skill-card skill-animate"><img src="images/swift.jpeg" alt="Swift"><br><span>Swift</span></div>
-        <div class="skill-card skill-animate"><img src="images/nodejs.png" alt="Node.js"><br><span>Node.js</span></div>
-        <div class="skill-card skill-animate"><img src="images/swiftui.jpeg" alt="SwiftUI"><br><span>SwiftUI</span></div>
-        <div class="skill-card skill-animate"><img src="images/mongodb.png" alt="MongoDB"><br><span>MongoDB</span></div>
-    </div>
-</section>
-
-
-
-   <!-- Projects Section -->
-<section id="projects" class="section">
-    <h2>Projects</h2>
-    <div class="projects-container">
-        <!-- Expense Tracker Project -->
-        <div class="project-item" data-project="expense-tracker">
-            <div class="project-header">
-                <div class="project-info">
-                    <h3>Expense Tracker - VivaahVerse</h3>
-                    <div class="project-tags">
-                        <span class="project-tag">Android (Kotlin)</span>
-                        <span class="project-tag">Jetpack Compose</span>
-                        <span class="project-tag">Node.js</span>
-                        <span class="project-tag">Material 3</span>
+    <main id="main">
+        <section id="home" class="hero">
+            <div class="wrap hero-grid">
+                <div class="hero-copy">
+                    <p class="hero-hello">Hello, I’m</p>
+                    <h1>Chaitany Kakde</h1>
+                    <p class="hero-role">Android / Mobile Engineer</p>
+                    <p class="hero-lede">I build high-quality Android applications and real-world software products.</p>
+                    <ul class="proof-list">
+                        <li>5× National Hackathon Winner</li>
+                        <li>2× Ideathon Winner</li>
+                        <li>Technical Head @ C³Cube</li>
+                    </ul>
+                    <div class="hero-actions">
+                        <a class="btn btn-primary" href="#work">View my work</a>
+                        <a class="btn btn-secondary" href="Chaitany_Resume_2025.pdf" download="Chaitany_Resume_2025.pdf">Download resume</a>
                     </div>
-                    <p>A Premium Fintech-styled Expense Tracker application featuring a modern "Midnight Emerald" dark theme. Built with Jetpack Compose for the UI and a Node.js/Express backend. Includes secure authentication, glassmorphism dashboard, dynamic analytics charts, and seamless transaction management.</p>
+                    <ul class="hero-links">
+                        <li><a href="https://github.com/chaitanykakde" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                        <li><a href="https://www.linkedin.com/in/chaitany-kakde-2a3ba62a8/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+                        <li><a href="mailto:chaitnykakde517@gmail.com">Email</a></li>
+                    </ul>
                 </div>
-                <div class="project-links">
-                    <a href="https://github.com/chaitanykakde/VivaahVerse-Chaitnay-Task" target="_blank" class="btn">View on GitHub</a>
+                <div class="hero-photo">
+                    <img src="images/profile.jpg" alt="Portrait of Chaitany Kakde" width="1248" height="1355">
                 </div>
             </div>
-            <div class="project-gallery">
-                <img src="images/expense_tracker/login.jpeg" class="project-gallery-img" alt="Login Screen">
-                <img src="images/expense_tracker/register.jpeg" class="project-gallery-img" alt="Registration Screen">
-                <img src="images/expense_tracker/home.jpeg" class="project-gallery-img" alt="Dashboard">
-                <img src="images/expense_tracker/add_transaction.jpeg" class="project-gallery-img" alt="Add Transaction">
-                <img src="images/expense_tracker/transactions.jpeg" class="project-gallery-img" alt="Transaction List">
-                <img src="images/expense_tracker/breakdown.jpeg" class="project-gallery-img" alt="Analytics">
-                <img src="images/expense_tracker/logout.jpeg" class="project-gallery-img" alt="Logout">
-            </div>
-        </div>
+        </section>
 
-        <!-- Other Projects (Refactored to new layout) -->
-        <div class="project-item" data-project="agewell">
-            <div class="project-header">
-                <div class="project-info">
-                    <h3>AGEWELL - Elder Care App</h3>
-                    <div class="project-tags">
-                        <span class="project-tag">Android</span>
-                        <span class="project-tag">Firebase</span>
-                        <span class="project-tag">OpenStreetMap API</span>
-                    </div>
-                    <p>Health monitoring app with SOS alerts, medication tracking, and real-time hospital mapping using FCM and Firebase.</p>
-                </div>
-                <div class="project-links">
-                    <a href="https://github.com/vishal-bhutekar21/Age-well-Elder-Care" target="_blank" class="btn">View on GitHub</a>
-                </div>
-            </div>
-            <div class="project-gallery">
-                <img src="images/agewell/1.jpeg" class="project-gallery-img" alt="Connect With Elders">
-                <img src="images/agewell/2.jpeg" class="project-gallery-img" alt="Home Screen">
-                <img src="images/agewell/3.jpeg" class="project-gallery-img" alt="BMI Calculator">
-                <img src="images/agewell/4.jpeg" class="project-gallery-img" alt="Workout Tracker">
-                <img src="images/agewell/5.jpeg" class="project-gallery-img" alt="Checkup Schedule">
-                <img src="images/agewell/6.jpeg" class="project-gallery-img" alt="Emergency Contact">
-                <img src="images/agewell/7.jpeg" class="project-gallery-img" alt="Medical Stock">
-            </div>
-        </div>
+        <section id="work" class="section" aria-labelledby="work-title">
+            <div class="wrap">
+                <header class="section-head">
+                    <p class="section-kicker">Featured work</p>
+                    <h2 id="work-title">Things I’ve built</h2>
+                    <p class="section-intro">Shipped Android products with real interfaces, APIs, and users — not mockups.</p>
+                </header>
 
-        <div class="project-item" data-project="carbonview">
-            <div class="project-header">
-                <div class="project-info">
-                    <h3>CARBON VIEW - Footprint Tracker</h3>
-                    <div class="project-tags">
-                        <span class="project-tag">IoT Integration</span>
-                        <span class="project-tag">Data Analytics</span>
+                <article class="project" data-project="expense-tracker" data-title="Expense Tracker — VivaahVerse">
+                    <p class="project-kicker">Android · Kotlin · Jetpack Compose</p>
+                    <h3>Expense Tracker — VivaahVerse</h3>
+                    <div class="project-shots">
+                        <button type="button" class="shot gallery-trigger" aria-label="Open Expense Tracker screenshots">
+                            <img src="images/expense_tracker/home.jpeg" alt="Expense Tracker dashboard" width="576" height="1280">
+                        </button>
+                        <button type="button" class="shot gallery-trigger" aria-label="Open Expense Tracker screenshots">
+                            <img src="images/expense_tracker/add_transaction.jpeg" alt="Add transaction screen" width="576" height="1280" loading="lazy">
+                        </button>
+                        <button type="button" class="shot gallery-trigger" aria-label="Open Expense Tracker screenshots">
+                            <img src="images/expense_tracker/breakdown.jpeg" alt="Analytics breakdown" width="576" height="1280" loading="lazy">
+                        </button>
                     </div>
-                    <p>Calculates emissions from manual entries, CSV files, and IoT devices with real-time data and industry dashboard.</p>
-                </div>
-                <div class="project-links">
-                    <a href="https://github.com/chaitanykakde/Carbon-View-App" target="_blank" class="btn">View on GitHub</a>
-                </div>
-            </div>
-            <div class="project-gallery">
-                <img src="images/carbonview/1.jpeg" class="project-gallery-img" alt="Manage Devices">
-                <img src="images/carbonview/2.jpeg" class="project-gallery-img" alt="Dashboard Overview">
-                <img src="images/carbonview/3.jpeg" class="project-gallery-img" alt="Carbon Footprint">
-                <img src="images/carbonview/4.jpeg" class="project-gallery-img" alt="Vehicle Report">
-                <img src="images/carbonview/5.jpeg" class="project-gallery-img" alt="Device Stats">
-                <img src="images/carbonview/6.jpeg" class="project-gallery-img" alt="Community">
-                <img src="images/carbonview/7.jpeg" class="project-gallery-img" alt="Emission Calc">
-                <img src="images/carbonview/8.jpeg" class="project-gallery-img" alt="Community Post">
-                <img src="images/carbonview/9.jpeg" class="project-gallery-img" alt="Emissions Dashboard">
-            </div>
-        </div>
+                    <div class="project-head">
+                        <div>
+                            <p>A Premium Fintech-styled Expense Tracker application featuring a modern “Midnight Emerald” dark theme. Built with Jetpack Compose for the UI and a Node.js/Express backend. Includes secure authentication, glassmorphism dashboard, dynamic analytics charts, and seamless transaction management.</p>
+                            <ul class="chip-list">
+                                <li>Android (Kotlin)</li>
+                                <li>Jetpack Compose</li>
+                                <li>Node.js</li>
+                                <li>Material 3</li>
+                            </ul>
+                        </div>
+                        <div class="project-links">
+                            <a class="btn btn-secondary" href="https://github.com/chaitanykakde/VivaahVerse-Chaitnay-Task" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+                            <button type="button" class="btn btn-ghost gallery-trigger">View screenshots</button>
+                        </div>
+                    </div>
+                </article>
 
-        <div class="project-item" data-project="policebharti">
-            <div class="project-header">
-                <div class="project-info">
-                    <h3>POLICE BHARTI - Exam Prep</h3>
-                    <div class="project-tags">
-                        <span class="project-tag">Educational</span>
-                        <span class="project-tag">Meta Chatbot</span>
+                <article class="project" data-project="agewell" data-title="AGEWELL — Elder Care App">
+                    <p class="project-kicker">Android · Firebase</p>
+                    <h3>AGEWELL — Elder Care App</h3>
+                    <div class="project-shots">
+                        <button type="button" class="shot gallery-trigger" aria-label="Open AGEWELL screenshots">
+                            <img src="images/agewell/1.jpeg" alt="AGEWELL connect with elders" width="576" height="1280" loading="lazy">
+                        </button>
+                        <button type="button" class="shot gallery-trigger" aria-label="Open AGEWELL screenshots">
+                            <img src="images/agewell/2.jpeg" alt="AGEWELL home screen" width="576" height="1280" loading="lazy">
+                        </button>
+                        <button type="button" class="shot gallery-trigger" aria-label="Open AGEWELL screenshots">
+                            <img src="images/agewell/6.jpeg" alt="AGEWELL emergency contact" width="576" height="1280" loading="lazy">
+                        </button>
                     </div>
-                    <p>Study app with quizzes, materials, and a Meta chatbot, using Firebase for real-time sync and authentication.</p>
-                </div>
-                <div class="project-links">
-                    <a href="https://github.com/KaranBankar/Police-Bharti" target="_blank" class="btn">View on GitHub</a>
-                </div>
-            </div>
-            <div class="project-gallery">
-                <img src="images/policebharti/1.jpeg" class="project-gallery-img" alt="Home Screen">
-                <img src="images/policebharti/2.jpeg" class="project-gallery-img" alt="Subject Wise MCQs">
-                <img src="images/policebharti/3.jpeg" class="project-gallery-img" alt="Syllabus">
-                <img src="images/policebharti/4.jpeg" class="project-gallery-img" alt="Test">
-                <img src="images/policebharti/5.jpeg" class="project-gallery-img" alt="Question Papers">
-            </div>
-        </div>
+                    <div class="project-head">
+                        <div>
+                            <p>Health monitoring app with SOS alerts, medication tracking, and real-time hospital mapping using FCM and Firebase.</p>
+                            <ul class="chip-list">
+                                <li>Android</li>
+                                <li>Firebase</li>
+                                <li>OpenStreetMap API</li>
+                            </ul>
+                        </div>
+                        <div class="project-links">
+                            <a class="btn btn-secondary" href="https://github.com/vishal-bhutekar21/Age-well-Elder-Care" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+                            <button type="button" class="btn btn-ghost gallery-trigger">View screenshots</button>
+                        </div>
+                    </div>
+                </article>
 
-        <div class="projects-grid-wrapper">
-            <div class="project-card-grid">
-                <img src="images/SGGS.jpg" alt="SGGS App" class="project-card-grid-img">
-                <div class="project-card-grid-info">
-                    <h3>SGGSIE&T - Paperless College</h3>
-                    <div class="project-tags">
-                        <span class="project-tag">Admin Dashboard</span>
-                        <span class="project-tag">Automation</span>
+                <article class="project" data-project="carbonview" data-title="CARBON VIEW — Footprint Tracker">
+                    <p class="project-kicker">Android · IoT · Analytics</p>
+                    <h3>CARBON VIEW — Footprint Tracker</h3>
+                    <div class="project-shots">
+                        <button type="button" class="shot gallery-trigger" aria-label="Open Carbon View screenshots">
+                            <img src="images/carbonview/2.jpeg" alt="Carbon View dashboard overview" width="576" height="1280" loading="lazy">
+                        </button>
+                        <button type="button" class="shot gallery-trigger" aria-label="Open Carbon View screenshots">
+                            <img src="images/carbonview/9.jpeg" alt="Carbon View emissions dashboard" width="576" height="1280" loading="lazy">
+                        </button>
+                        <button type="button" class="shot gallery-trigger" aria-label="Open Carbon View screenshots">
+                            <img src="images/carbonview/4.jpeg" alt="Carbon View vehicle report" width="576" height="1280" loading="lazy">
+                        </button>
                     </div>
-                    <p>Secure election system, health & leave automation, budget tracking, encrypted chat, and admin dashboard.</p>
-                    <div class="project-links">
-                        <a href="https://github.com/KaranBankar/SGGSIE-T" target="_blank" class="btn">View on GitHub</a>
+                    <div class="project-head">
+                        <div>
+                            <p>Calculates emissions from manual entries, CSV files, and IoT devices with real-time data and industry dashboard.</p>
+                            <ul class="chip-list">
+                                <li>IoT Integration</li>
+                                <li>Data Analytics</li>
+                            </ul>
+                        </div>
+                        <div class="project-links">
+                            <a class="btn btn-secondary" href="https://github.com/chaitanykakde/Carbon-View-App" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+                            <button type="button" class="btn btn-ghost gallery-trigger">View screenshots</button>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project" data-project="policebharti" data-title="POLICE BHARTI — Exam Prep">
+                    <p class="project-kicker">Android · Firebase</p>
+                    <h3>POLICE BHARTI — Exam Prep</h3>
+                    <div class="project-shots">
+                        <button type="button" class="shot gallery-trigger" aria-label="Open Police Bharti screenshots">
+                            <img src="images/policebharti/1.jpeg" alt="Police Bharti home screen" width="576" height="1280" loading="lazy">
+                        </button>
+                        <button type="button" class="shot gallery-trigger" aria-label="Open Police Bharti screenshots">
+                            <img src="images/policebharti/2.jpeg" alt="Subject-wise MCQs" width="576" height="1280" loading="lazy">
+                        </button>
+                        <button type="button" class="shot gallery-trigger" aria-label="Open Police Bharti screenshots">
+                            <img src="images/policebharti/4.jpeg" alt="Police Bharti test screen" width="576" height="1280" loading="lazy">
+                        </button>
+                    </div>
+                    <div class="project-head">
+                        <div>
+                            <p>Study app with quizzes, materials, and a Meta chatbot, using Firebase for real-time sync and authentication.</p>
+                            <ul class="chip-list">
+                                <li>Educational</li>
+                                <li>Meta Chatbot</li>
+                            </ul>
+                        </div>
+                        <div class="project-links">
+                            <a class="btn btn-secondary" href="https://github.com/KaranBankar/Police-Bharti" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+                            <button type="button" class="btn btn-ghost gallery-trigger">View screenshots</button>
+                        </div>
+                    </div>
+                </article>
+
+                <div class="more-work">
+                    <h3 class="more-work-title">More work</h3>
+                    <div class="project-grid">
+                        <article class="project-card">
+                            <img src="images/SGGS.jpg" alt="SGGSIE&T paperless college app screens" width="1280" height="1280" loading="lazy">
+                            <div class="project-card-body">
+                                <h3>SGGSIE&amp;T — Paperless College</h3>
+                                <p>Secure election system, health &amp; leave automation, budget tracking, encrypted chat, and admin dashboard.</p>
+                                <ul class="chip-list">
+                                    <li>Admin Dashboard</li>
+                                    <li>Automation</li>
+                                </ul>
+                                <a href="https://github.com/KaranBankar/SGGSIE-T" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+                            </div>
+                        </article>
+                        <article class="project-card">
+                            <img src="images/servify.JPG" alt="Servify service provider app" width="645" height="638" loading="lazy">
+                            <div class="project-card-body">
+                                <h3>SERVIFY — Service Provider</h3>
+                                <p>Real-time service booking with location-based recommendations and secure authentication.</p>
+                                <ul class="chip-list">
+                                    <li>Service Booking</li>
+                                    <li>Location Based</li>
+                                </ul>
+                                <a href="https://github.com/KaranBankar/Servify" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+                            </div>
+                        </article>
+                        <article class="project-card">
+                            <img src="images/geca.jpg" alt="GECCS attendance app" width="1280" height="1280" loading="lazy">
+                            <div class="project-card-body">
+                                <h3>GECCS — Attendance App</h3>
+                                <p>Real-time Attendance Reporting and Assignment Submission App for Students and Notices by faculty.</p>
+                                <ul class="chip-list">
+                                    <li>Academic</li>
+                                    <li>Real-time DB</li>
+                                </ul>
+                                <a href="https://github.com/chaitanykakde/CSMSS-Poly" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+                            </div>
+                        </article>
                     </div>
                 </div>
             </div>
+        </section>
 
-            <div class="project-card-grid">
-                <img src="images/servify.JPG" alt="Servify App" class="project-card-grid-img">
-                <div class="project-card-grid-info">
-                    <h3>SERVIFY - Service Provider</h3>
-                    <div class="project-tags">
-                        <span class="project-tag">Service Booking</span>
-                        <span class="project-tag">Location Based</span>
+        <section id="achievements" class="section section-alt" aria-labelledby="achievements-title">
+            <div class="wrap">
+                <header class="section-head">
+                    <p class="section-kicker">Achievements</p>
+                    <h2 id="achievements-title">Recognition &amp; competition</h2>
+                    <p class="section-intro">National hackathons and idea competitions — with certificates and event photos as evidence.</p>
+                </header>
+
+                <ul class="achieve-list">
+                    <li class="achieve-item">
+                        <button type="button" class="achieve-media lightbox-trigger" aria-label="View IIT Goa Hack Overflow certificate">
+                            <img src="images/iitgoa.JPG" alt="Certificate: 1st place, IIT Goa Hack Overflow" width="689" height="622" loading="lazy">
+                        </button>
+                        <div class="achieve-body">
+                            <p class="achieve-result">1st Place</p>
+                            <h3>IIT Goa Hack Overflow</h3>
+                            <p>Winner at Hackathon organized by IIT Goa</p>
+                        </div>
+                    </li>
+                    <li class="achieve-item">
+                        <button type="button" class="achieve-media lightbox-trigger" aria-label="View HackFusion’25 photos">
+                            <img src="images/sggsnanded.JPG" alt="HackFusion’25 winning team and certificate" width="667" height="492" loading="lazy">
+                        </button>
+                        <div class="achieve-body">
+                            <p class="achieve-result">1st Place</p>
+                            <h3>HackFusion’25</h3>
+                            <p>Winner at SGGSIE&amp;T Nanded Hackathon</p>
+                        </div>
+                    </li>
+                    <li class="achieve-item">
+                        <button type="button" class="achieve-media lightbox-trigger" aria-label="View Innovo Hackathon photo">
+                            <img src="images/innovo.JPG" alt="Innovo Hackathon team photo" width="661" height="503" loading="lazy">
+                        </button>
+                        <div class="achieve-body">
+                            <p class="achieve-result">1st Place</p>
+                            <h3>Innovo Hackathon</h3>
+                            <p>Winner at Shri Sant Gajanan Maharaj College of Engineering</p>
+                        </div>
+                    </li>
+                    <li class="achieve-item">
+                        <button type="button" class="achieve-media lightbox-trigger" aria-label="View Wings Hackathon certificate">
+                            <img src="images/wings.jpg" alt="Certificate: 3rd place, Wings Hackathon" width="1600" height="1167" loading="lazy">
+                        </button>
+                        <div class="achieve-body">
+                            <p class="achieve-result">3rd Place</p>
+                            <h3>Wings Hackathon</h3>
+                            <p>Government College of Engineering Aurangabad</p>
+                        </div>
+                    </li>
+                    <li class="achieve-item">
+                        <button type="button" class="achieve-media lightbox-trigger" aria-label="View National Level Project Competition certificate">
+                            <img src="images/amravati.jpg" alt="Certificate: 1st place, National Level Project Competition" width="947" height="1367" loading="lazy">
+                        </button>
+                        <div class="achieve-body">
+                            <p class="achieve-result">1st Place</p>
+                            <h3>National Level Project Competition</h3>
+                            <p>Developed AgeWell App at Prof. Ram Meghe Institute</p>
+                        </div>
+                    </li>
+                    <li class="achieve-item">
+                        <div class="achieve-body achieve-body-solo">
+                            <p class="achieve-result">3rd Place</p>
+                            <h3>Ideathon 7.0</h3>
+                            <p>Ankur Incubation Center, GECA</p>
+                        </div>
+                    </li>
+                    <li class="achieve-item">
+                        <button type="button" class="achieve-media lightbox-trigger" aria-label="View IDEATHON 8.0 photo">
+                            <img src="images/ideathon_8.0.png" alt="IDEATHON 8.0 first prize photo" width="792" height="791" loading="lazy">
+                        </button>
+                        <div class="achieve-body">
+                            <p class="achieve-result">1st Prize</p>
+                            <h3>IDEATHON 8.0</h3>
+                            <p>National Level Idea Competition organized by AnkurGECA Incubation Centre Foundation &amp; Entrepreneurship Development Club, Government College of Engineering, Aurangabad.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="experience" class="section" aria-labelledby="experience-title">
+            <div class="wrap">
+                <header class="section-head">
+                    <p class="section-kicker">Experience</p>
+                    <h2 id="experience-title">Work &amp; leadership</h2>
+                </header>
+
+                <ol class="roles">
+                    <li class="role">
+                        <p class="role-dates"><time datetime="2025-09">Sep 2025</time> — Present</p>
+                        <div class="role-body">
+                            <h3>Software Developer Intern</h3>
+                            <p class="role-org">Koshpal</p>
+                            <ul>
+                                <li>Remote intern focused on mobile application development for Android.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="role">
+                        <p class="role-dates"><time datetime="2025-04">Apr 2025</time> — Present</p>
+                        <div class="role-body">
+                            <h3>Technical Head</h3>
+                            <p class="role-org">C³ {C-CuBe}</p>
+                            <ul>
+                                <li>On-site technical project leadership in Chhatrapati Sambhajinagar, Maharashtra, India.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="role">
+                        <p class="role-dates"><time datetime="2024-09">Sep 2024</time> — <time datetime="2025-04">Apr 2025</time></p>
+                        <div class="role-body">
+                            <h3>Member for Android Development</h3>
+                            <p class="role-org">C³ {C-CuBe}</p>
+                            <ul>
+                                <li>Android and mobile application development, including debugging.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="role">
+                        <p class="role-dates"><time datetime="2023-08">Aug 2023</time> — <time datetime="2024-01">Jan 2024</time></p>
+                        <div class="role-body">
+                            <h3>Software Engineer, Intern</h3>
+                            <p class="role-org">Mountreach Solutions, Amravati, India</p>
+                            <ul>
+                                <li>Developed Android apps using Java, Kotlin, Jetpack Compose, and MVVM architecture.</li>
+                                <li>Worked with Firebase for real-time sync and notifications; designed UI with Material Design; integrated APIs (Retrofit, Volley), Location Manager, and SMS services.</li>
+                                <li>Implemented TensorFlow Lite for on-device ML and file handling for PDF generation, Excel processing, and JSON parsing.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="role">
+                        <p class="role-dates"><time datetime="2023-05">May 2023</time> — <time datetime="2023-07">Jul 2023</time></p>
+                        <div class="role-body">
+                            <h3>Android Developer, Training</h3>
+                            <p class="role-org">Mountreach Solutions, Amravati, India</p>
+                            <ul>
+                                <li>Explored Android SDK, local databases (SQLite, Room DB), and UI development with XML.</li>
+                                <li>Learned Activity Lifecycle, Fragments, and UI components; practiced API integration, Location Manager, and Android Studio’s file structure.</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="skills" class="section section-alt" aria-labelledby="skills-title">
+            <div class="wrap">
+                <header class="section-head">
+                    <p class="section-kicker">Skills</p>
+                    <h2 id="skills-title">Technologies</h2>
+                    <p class="section-intro">Android is the core. Everything else supports shipping those products.</p>
+                </header>
+
+                <div class="skill-groups">
+                    <div class="skill-group skill-group-primary">
+                        <h3>Android</h3>
+                        <ul class="chip-list">
+                            <li>Kotlin</li>
+                            <li>Java</li>
+                            <li>Android SDK</li>
+                            <li>Jetpack Compose</li>
+                            <li>XML</li>
+                            <li>MVVM</li>
+                            <li>Retrofit</li>
+                            <li>SQLite</li>
+                        </ul>
                     </div>
-                    <p>Real-time service booking with location-based recommendations and secure authentication.</p>
-                    <div class="project-links">
-                        <a href="https://github.com/KaranBankar/Servify" target="_blank" class="btn">View on GitHub</a>
+                    <div class="skill-group">
+                        <h3>Backend / Cloud</h3>
+                        <ul class="chip-list">
+                            <li>Firebase</li>
+                            <li>REST APIs</li>
+                            <li>Node.js</li>
+                            <li>SQL</li>
+                            <li>MongoDB</li>
+                            <li>AWS</li>
+                            <li>GCS</li>
+                        </ul>
+                    </div>
+                    <div class="skill-group">
+                        <h3>Tools</h3>
+                        <ul class="chip-list">
+                            <li>GitHub</li>
+                            <li>Postman</li>
+                            <li>Figma</li>
+                            <li>XAMPP</li>
+                        </ul>
+                    </div>
+                    <div class="skill-group">
+                        <h3>Additional</h3>
+                        <ul class="chip-list">
+                            <li>Python</li>
+                            <li>JavaScript</li>
+                            <li>Swift</li>
+                            <li>SwiftUI</li>
+                        </ul>
                     </div>
                 </div>
             </div>
+        </section>
 
-            <div class="project-card-grid">
-                <img src="images/geca.jpg" alt="GECCS App" class="project-card-grid-img">
-                <div class="project-card-grid-info">
-                    <h3>GECCS - Attendance App</h3>
-                    <div class="project-tags">
-                        <span class="project-tag">Academic</span>
-                        <span class="project-tag">Real-time DB</span>
-                    </div>
-                    <p>Real-time Attendance Reporting and Assignment Submission App for Students and Notices by faculty.</p>
-                    <div class="project-links">
-                        <a href="https://github.com/chaitanykakde/CSMSS-Poly" target="_blank" class="btn">View on GitHub</a>
-                    </div>
+        <section id="education" class="section" aria-labelledby="education-title">
+            <div class="wrap">
+                <header class="section-head">
+                    <p class="section-kicker">Education</p>
+                    <h2 id="education-title">Academic background</h2>
+                </header>
+
+                <ul class="edu-list">
+                    <li class="edu-item">
+                        <p class="edu-dates">Jul 2024 — Jun 2027 · Pursuing</p>
+                        <h3>Bachelor of Technology: Computer Science and Engineering</h3>
+                        <p>Government College of Engineering, Chhatrapati Sambhajinagar, India</p>
+                        <p class="edu-meta">SGPA 9.2</p>
+                    </li>
+                    <li class="edu-item">
+                        <p class="edu-dates">Jun 2021 — Jun 2024 · Completed</p>
+                        <h3>Diploma: Computer Engineering</h3>
+                        <p>Government Polytechnic Ambad, Maharashtra, India</p>
+                        <p class="edu-meta">Grade 9.3</p>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="about" class="section section-alt" aria-labelledby="about-title">
+            <div class="wrap about-grid">
+                <header class="section-head">
+                    <p class="section-kicker">About</p>
+                    <h2 id="about-title">What I work on</h2>
+                </header>
+                <div class="about-copy">
+                    <p>I specialize in building scalable, user-centric Android apps with Kotlin, Java, Jetpack Compose, and Firebase — including real-time databases, API integration, and on-device ML where the product needs it.</p>
+                    <p>I’m pursuing a B.Tech in Computer Science and Engineering at Government College of Engineering, Chhatrapati Sambhajinagar. Alongside mobile work I design interfaces in Figma, integrate backends over REST, and care about code quality through testing and careful debugging.</p>
                 </div>
             </div>
-        </div>
-    </div>
-</section>
+        </section>
 
-<!-- Achievements Section -->
-<section id="achievements" class="section">
-    <h2>Achievements</h2>
-    <div class="achievements-container">
-        <div class="achievement-item">
-            <span class="achievement-number">01</span>
-            <img src="images/iitgoa.JPG" alt="IIT Goa Hackathon" class="achievement-img">
-            <div class="achievement-content">
-                <h3>🏆 1st Place - IIT Goa Hack Overflow</h3>
-                <p>Winner at Hackathon organized by IIT Goa</p>
+        <section id="resume" class="section" aria-labelledby="resume-title">
+            <div class="wrap resume-band">
+                <div>
+                    <p class="section-kicker">Resume</p>
+                    <h2 id="resume-title">Want the full picture?</h2>
+                    <p>View my experience, skills, and projects in one document.</p>
+                </div>
+                <a class="btn btn-primary" href="Chaitany_Resume_2025.pdf" download="Chaitany_Resume_2025.pdf">Download resume</a>
             </div>
-        </div>
-        <div class="achievement-item">
-            <span class="achievement-number">02</span>
-            <img src="images/sggsnanded.JPG" alt="HackFusion’25" class="achievement-img">
-            <div class="achievement-content">
-                <h3>🏆 1st Place - HackFusion’25</h3>
-                <p>Winner at SGGSIE&T Nanded Hackathon</p>
-            </div>
-        </div>
-        <div class="achievement-item">
-            <span class="achievement-number">03</span>
-            <img src="images/innovo.JPG" alt="Innovo Hackathon" class="achievement-img">
-            <div class="achievement-content">
-                <h3>🏆 1st Place - Innovo Hackathon</h3>
-                <p>Winner at Shri Sant Gajanan Maharaj College of Engineering</p>
-            </div>
-        </div>
-        <div class="achievement-item">
-            <span class="achievement-number">04</span>
-            <img src="images/wings.jpg" alt="Wings Hackathon" class="achievement-img">
-            <div class="achievement-content">
-                <h3>🏆 3rd Place - Wings Hackathon</h3>
-                <p>Government College of Engineering Aurangabad</p>
-            </div>
-        </div>
-        <div class="achievement-item">
-            <span class="achievement-number">05</span>
-            <img src="images/amravati.jpg" alt="National Project Competition" class="achievement-img">
-            <div class="achievement-content">
-                <h3>🏆 1st Place - National Level Project Competition</h3>
-                <p>Developed AgeWell App at Prof. Ram Meghe Institute</p>
-            </div>
-        </div>
-        <div class="achievement-item">
-            <span class="achievement-number">06</span>
-            <img src="images/ideathon7.jpg" alt="Ideathon 7.0" class="achievement-img">
-            <div class="achievement-content">
-                <h3>🏆 3rd Place - Ideathon 7.0</h3>
-                <p>Ankur Incubation Center, GECA</p>
-            </div>
-        </div>
-        <div class="achievement-item">
-            <span class="achievement-number">07</span>
-            <img src="images/ideathon_8.0.png" alt="IDEATHON 8.0" class="achievement-img">
-            <div class="achievement-content">
-                <h3>🏆 1st Prize - IDEATHON 8.0</h3>
-                <p>National Level Idea Competition organized by AnkurGECA Incubation Centre Foundation & Entrepreneurship Development Club, Government College of Engineering, Aurangabad.</p>
-            </div>
-        </div>
-    </div>
-</section>
+        </section>
 
-<!-- Fullscreen Image Modal -->
-<div id="image-modal" class="modal">
-    <span class="close-btn">×</span>
-    <img id="modal-image" class="modal-content" alt="Fullscreen Achievement">
-</div>
+        <section id="contact" class="section section-alt" aria-labelledby="contact-title">
+            <div class="wrap">
+                <header class="section-head">
+                    <p class="section-kicker">Contact</p>
+                    <h2 id="contact-title">Let’s talk</h2>
+                    <p class="section-intro">Email is fastest. Phone and LinkedIn work too.</p>
+                </header>
 
-<!-- Services Section -->
-<section id="services" class="section">
-    <h2>Services</h2>
-    <div class="services-container">
-        <div class="service-card">
-            <img src="images/appdev.jpeg" alt="App Development" class="service-icon">
-            <h3>App Development</h3>
-            <p>Building scalable, user-centric mobile apps with Kotlin, Java, and Jetpack Compose.</p>
-        </div>
-        <div class="service-card">
-            <img src="images/webdev.jpeg" alt="Web Development" class="service-icon">
-            <h3>Web Development</h3>
-            <p>Creating responsive and dynamic websites using HTML, CSS, JavaScript, and PHP.</p>
-        </div>
-        <div class="service-card">
-            <img src="images/uiuxdev.jpeg" alt="UI/UX Designer" class="service-icon">
-            <h3>UI/UX Designer</h3>
-            <p>Designing intuitive and visually appealing interfaces with tools like Figma.</p>
-        </div>
-        <div class="service-card">
-            <img src="images/testingdev.png" alt="Unit Tester" class="service-icon">
-            <h3>Unit Tester</h3>
-            <p>Ensuring code quality and reliability through comprehensive unit testing.</p>
-        </div>
-        <div class="service-card">
-            <img src="images/gamedev.jpeg" alt="Game Development" class="service-icon">
-            <h3>Game Development with Python</h3>
-            <p>Developing engaging games using Python and frameworks like Pygame.</p>
-        </div>
-        <div class="service-card">
-            <img src="images/figmadev.png" alt="Prototype Designer" class="service-icon">
-            <h3>Prototype Designer</h3>
-            <p>Crafting functional prototypes to bring ideas to life with rapid iteration.</p>
-        </div>
-    </div>
-    <!-- Summary Stats -->
-    <div class="summary-container">
-        <div class="summary-item">
-            <span class="summary-number">7+</span>
-            <p>Projects Completed</p>
-        </div>
-        <div class="summary-item">
-            <span class="summary-number">6+</span>
-            <p>Winning Awards</p>
-        </div>
-    </div>
-</section>
+                <ul class="contact-list">
+                    <li>
+                        <a href="mailto:chaitnykakde517@gmail.com">
+                            <span class="contact-label">Email</span>
+                            <span class="contact-value">chaitnykakde517@gmail.com</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="tel:+919322067937">
+                            <span class="contact-label">Phone</span>
+                            <span class="contact-value">+91 9322067937</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.linkedin.com/in/chaitany-kakde-2a3ba62a8/" target="_blank" rel="noopener noreferrer">
+                            <span class="contact-label">LinkedIn</span>
+                            <span class="contact-value">chaitany-kakde-2a3ba62a8</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/chaitanykakde" target="_blank" rel="noopener noreferrer">
+                            <span class="contact-label">GitHub</span>
+                            <span class="contact-value">github.com/chaitanykakde</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </main>
 
- <!-- Contact Section -->
-<section id="contact" class="section">
-    <h2>Contact Me</h2>
-    <div class="contact-container">
-        <div class="contact-item">
-            <img src="images/email.png" alt="Email Icon" class="contact-icon">
-            <div class="contact-info">
-                <h3>Email</h3>
-                <p>chaitnykakde517@gmail.com</p>
-            </div>
+    <footer class="site-footer">
+        <div class="wrap footer-inner">
+            <p>© <span id="year">2026</span> Chaitany Kakde</p>
+            <ul class="footer-links">
+                <li><a href="https://github.com/chaitanykakde" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                <li><a href="https://www.linkedin.com/in/chaitany-kakde-2a3ba62a8/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+                <li><a href="mailto:chaitnykakde517@gmail.com">Email</a></li>
+                <li><a href="https://www.instagram.com/chaitanyk_07/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+            </ul>
         </div>
-        <div class="contact-item">
-            <img src="images/contact.png" alt="Phone Icon" class="contact-icon">
-            <div class="contact-info">
-                <h3>Phone</h3>
-                <p>+91 9322067937</p>
-            </div>
-        </div>
-        <div class="contact-item">
-            <img src="images/linkedinb;ack.png" alt="LinkedIn Icon" class="contact-icon">
-            <div class="contact-info">
-                <h3>LinkedIn</h3>
-                <p><a href="https://www.linkedin.com/in/chaitany-kakde-2a3ba62a8/" target="_blank">linkedin.com</a></p>
-            </div>
-        </div>
-    </div>
-</section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <p>© 2025 Chaitany. All rights reserved.</p>
     </footer>
+
+    <div class="modal" id="gallery-modal" role="dialog" aria-modal="true" aria-labelledby="gallery-title" hidden>
+        <div class="modal-backdrop" data-close-gallery></div>
+        <div class="modal-panel" role="document">
+            <div class="modal-bar">
+                <h2 id="gallery-title">Screenshots</h2>
+                <button type="button" class="icon-btn" data-close-gallery aria-label="Close screenshots">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-track" id="gallery-track"></div>
+        </div>
+    </div>
+
+    <div class="modal" id="lightbox-modal" role="dialog" aria-modal="true" aria-label="Achievement image" hidden>
+        <div class="modal-backdrop" data-close-lightbox></div>
+        <div class="modal-panel modal-panel-photo" role="document">
+            <button type="button" class="icon-btn lightbox-close" data-close-lightbox aria-label="Close image">
+                <span aria-hidden="true">×</span>
+            </button>
+            <img id="lightbox-image" alt="">
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>

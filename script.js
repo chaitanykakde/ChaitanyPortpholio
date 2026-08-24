@@ -1,270 +1,234 @@
-// Smooth scrolling for navigation links
-document.querySelectorAll('.nav-links a').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const targetId = this.getAttribute('href');
-        const targetSection = document.querySelector(targetId);
-        targetSection.scrollIntoView({ behavior: 'smooth' });
-        if (window.innerWidth <= 768) {
-            const navLinks = document.querySelector('.nav-links');
-            const hamburger = document.querySelector('.hamburger');
-            navLinks.classList.remove('active');
-            hamburger.classList.remove('active');
-        }
-    });
-});
+(function () {
+    const GALLERIES = {
+        'expense-tracker': [
+            'images/expense_tracker/login.jpeg',
+            'images/expense_tracker/register.jpeg',
+            'images/expense_tracker/home.jpeg',
+            'images/expense_tracker/add_transaction.jpeg',
+            'images/expense_tracker/transactions.jpeg',
+            'images/expense_tracker/breakdown.jpeg',
+            'images/expense_tracker/logout.jpeg'
+        ],
+        agewell: [
+            'images/agewell/1.jpeg',
+            'images/agewell/2.jpeg',
+            'images/agewell/3.jpeg',
+            'images/agewell/4.jpeg',
+            'images/agewell/5.jpeg',
+            'images/agewell/6.jpeg',
+            'images/agewell/7.jpeg'
+        ],
+        carbonview: [
+            'images/carbonview/1.jpeg',
+            'images/carbonview/2.jpeg',
+            'images/carbonview/3.jpeg',
+            'images/carbonview/4.jpeg',
+            'images/carbonview/5.jpeg',
+            'images/carbonview/6.jpeg',
+            'images/carbonview/7.jpeg',
+            'images/carbonview/8.jpeg',
+            'images/carbonview/9.jpeg'
+        ],
+        policebharti: [
+            'images/policebharti/1.jpeg',
+            'images/policebharti/2.jpeg',
+            'images/policebharti/3.jpeg',
+            'images/policebharti/4.jpeg',
+            'images/policebharti/5.jpeg'
+        ]
+    };
 
-// Add active class to nav links on scroll and animate sections
-window.addEventListener('scroll', () => {
-    const sections = document.querySelectorAll('.section');
-    const navLinks = document.querySelectorAll('.nav-links a');
-    let current = '';
+    const html = document.documentElement;
+    const themeToggle = document.getElementById('theme-toggle');
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileNav = document.getElementById('mobile-nav');
+    const galleryModal = document.getElementById('gallery-modal');
+    const galleryTrack = document.getElementById('gallery-track');
+    const galleryTitle = document.getElementById('gallery-title');
+    const lightboxModal = document.getElementById('lightbox-modal');
+    const lightboxImage = document.getElementById('lightbox-image');
+    const yearEl = document.getElementById('year');
 
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop - 100;
-        if (window.pageYOffset >= sectionTop) {
-            current = section.getAttribute('id');
-        }
-    });
+    let lastFocus = null;
+    let activeDialog = null;
 
-    navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === `#${current}`) {
-            link.classList.add('active');
-        }
-    });
-
-    const navbar = document.querySelector('.navbar');
-    if (window.scrollY > 50) {
-        navbar.classList.add('scrolled');
-    } else {
-        navbar.classList.remove('scrolled');
+    function currentTheme() {
+        return html.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
     }
-});
 
-// Helper function for Intersection Observer
-function setupIntersectionObserver(sectionId, itemClass, threshold = 0.2) {
-    const section = document.getElementById(sectionId);
-    const items = document.querySelectorAll(itemClass);
+    function updateThemeButton() {
+        const dark = currentTheme() === 'dark';
+        themeToggle.setAttribute('aria-label', dark ? 'Switch to light theme' : 'Switch to dark theme');
+    }
 
-    if (section && items.length > 0) {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    items.forEach((item, index) => {
-                        // Only add visible class if not already added to prevent re-animation flicker
-                        if (!item.classList.contains('visible')) {
-                            setTimeout(() => {
-                                item.classList.add('visible');
-                            }, index * 100); // Staggered delay
-                        }
-                    });
-                    // Optional: Unobserve after triggering if you want it to animate only once
-                    // observer.unobserve(section); 
-                } 
-                // Uncomment else block if you want repeated animations on scroll up/down
-                /* else {
-                    items.forEach(item => {
-                        item.classList.remove('visible');
-                    });
-                } */
+    function setTheme(theme) {
+        html.setAttribute('data-theme', theme);
+        try {
+            localStorage.setItem('theme', theme);
+        } catch (e) { /* ignore */ }
+        updateThemeButton();
+    }
+
+    function focusables(root) {
+        return [...root.querySelectorAll('a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])')]
+            .filter(function (el) {
+                return el.getAttribute('aria-hidden') !== 'true';
             });
-        }, {
-            threshold: threshold
+    }
+
+    function trapTab(event, root) {
+        if (event.key !== 'Tab') return;
+        const items = focusables(root);
+        if (!items.length) return;
+        const first = items[0];
+        const last = items[items.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+            event.preventDefault();
+            last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+            event.preventDefault();
+            first.focus();
+        }
+    }
+
+    function openMobileNav() {
+        mobileNav.hidden = false;
+        menuToggle.setAttribute('aria-expanded', 'true');
+        menuToggle.setAttribute('aria-label', 'Close menu');
+        document.body.classList.add('nav-open');
+        const first = mobileNav.querySelector('a');
+        if (first) first.focus();
+    }
+
+    function closeMobileNav() {
+        if (mobileNav.hidden) return;
+        mobileNav.hidden = true;
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.setAttribute('aria-label', 'Open menu');
+        document.body.classList.remove('nav-open');
+        menuToggle.focus();
+    }
+
+    function openDialog(dialog) {
+        lastFocus = document.activeElement;
+        activeDialog = dialog;
+        dialog.hidden = false;
+        document.body.classList.add('modal-open');
+        const closeBtn = dialog.querySelector('[data-close-gallery], [data-close-lightbox]');
+        if (closeBtn) closeBtn.focus();
+    }
+
+    function closeDialog(dialog) {
+        if (!dialog || dialog.hidden) return;
+        dialog.hidden = true;
+        if (dialog === galleryModal) galleryTrack.innerHTML = '';
+        if (dialog === lightboxModal) {
+            lightboxImage.removeAttribute('src');
+            lightboxImage.alt = '';
+        }
+        if (activeDialog === dialog) activeDialog = null;
+        const galleryClosed = !galleryModal || galleryModal.hidden;
+        const lightboxClosed = !lightboxModal || lightboxModal.hidden;
+        if (galleryClosed && lightboxClosed) {
+            document.body.classList.remove('modal-open');
+        }
+        if (lastFocus && typeof lastFocus.focus === 'function') lastFocus.focus();
+    }
+
+    function openGallery(projectEl) {
+        const id = projectEl.getAttribute('data-project');
+        const title = projectEl.getAttribute('data-title') || 'Screenshots';
+        const images = GALLERIES[id];
+        if (!images) return;
+        galleryTitle.textContent = title;
+        galleryTrack.innerHTML = images.map(function (src) {
+            return '<img src="' + src + '" alt="' + title.replace(/"/g, '') + ' screenshot">';
+        }).join('');
+        openDialog(galleryModal);
+    }
+
+    themeToggle.addEventListener('click', function () {
+        setTheme(currentTheme() === 'dark' ? 'light' : 'dark');
+    });
+    updateThemeButton();
+
+    menuToggle.addEventListener('click', function () {
+        if (mobileNav.hidden) openMobileNav();
+        else closeMobileNav();
+    });
+
+    mobileNav.addEventListener('click', function (event) {
+        if (event.target.closest('a')) closeMobileNav();
+    });
+
+    document.querySelectorAll('.gallery-trigger').forEach(function (el) {
+        el.addEventListener('click', function (event) {
+            event.preventDefault();
+            const project = el.closest('[data-project]');
+            if (project) openGallery(project);
         });
-
-        observer.observe(section);
-    }
-}
-
-// Setup observers for different sections
-setupIntersectionObserver('projects', '.project-item');
-setupIntersectionObserver('projects', '.project-card-grid'); // Observe new grid cards
-setupIntersectionObserver('achievements', '.achievement-item');
-setupIntersectionObserver('skills', '.skill-card', 0.3);
-setupIntersectionObserver('services', '.service-card');
-setupIntersectionObserver('contact', '.contact-item');
-
-// Hamburger menu toggle
-const hamburger = document.querySelector('.hamburger');
-const navLinks = document.querySelector('.nav-links');
-if (hamburger && navLinks) {
-    hamburger.addEventListener('click', () => {
-        hamburger.classList.toggle('active');
-        navLinks.classList.toggle('active');
     });
-}
 
-// Project Image Modal Logic
-const projectCards = document.querySelectorAll('.project-item[data-project]');
-const projectModal = document.createElement('div');
-projectModal.classList.add('modal');
-projectModal.id = 'project-modal';
-projectModal.innerHTML = `
-    <span class="close-btn project-close-btn">×</span>
-    <div class="modal-content-scroll">
-        <!-- Images will be injected here -->
-    </div>
-`;
-document.body.appendChild(projectModal);
+    document.querySelectorAll('.lightbox-trigger').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            const img = btn.querySelector('img');
+            if (!img) return;
+            lightboxImage.src = img.src;
+            lightboxImage.alt = img.alt || '';
+            openDialog(lightboxModal);
+        });
+    });
 
-const projectModalContent = projectModal.querySelector('.modal-content-scroll');
-const projectCloseBtn = projectModal.querySelector('.project-close-btn');
+    document.querySelectorAll('[data-close-gallery]').forEach(function (el) {
+        el.addEventListener('click', function () { closeDialog(galleryModal); });
+    });
+    document.querySelectorAll('[data-close-lightbox]').forEach(function (el) {
+        el.addEventListener('click', function () { closeDialog(lightboxModal); });
+    });
 
-projectCards.forEach(card => {
-    card.addEventListener('click', function(e) {
-        // Prevent opening modal if clicking the GitHub button or if clicking inside the gallery (optional, but user might want to expand from gallery too)
-        // Let's allow clicking anywhere on the card except the button to open the full modal
-        if(e.target.classList.contains('btn')) return;
-
-        const projectId = this.getAttribute('data-project');
-        let images = [];
-
-        // Logic to fetch images based on projectId
-        if (projectId === 'expense-tracker') {
-             images = [
-                'images/expense_tracker/login.jpeg',
-                'images/expense_tracker/register.jpeg',
-                'images/expense_tracker/home.jpeg',
-                'images/expense_tracker/add_transaction.jpeg',
-                'images/expense_tracker/transactions.jpeg',
-                'images/expense_tracker/breakdown.jpeg',
-                'images/expense_tracker/logout.jpeg'
-            ];
-        } else if (projectId === 'agewell') {
-            images = [
-                'images/agewell/1.jpeg',
-                'images/agewell/2.jpeg',
-                'images/agewell/3.jpeg',
-                'images/agewell/4.jpeg',
-                'images/agewell/5.jpeg',
-                'images/agewell/6.jpeg',
-                'images/agewell/7.jpeg'
-            ];
-        } else if (projectId === 'carbonview') {
-            images = [
-                'images/carbonview/1.jpeg',
-                'images/carbonview/2.jpeg',
-                'images/carbonview/3.jpeg',
-                'images/carbonview/4.jpeg',
-                'images/carbonview/5.jpeg',
-                'images/carbonview/6.jpeg',
-                'images/carbonview/7.jpeg',
-                'images/carbonview/8.jpeg',
-                'images/carbonview/9.jpeg'
-            ];
-        } else if (projectId === 'policebharti') {
-            images = [
-                'images/policebharti/1.jpeg',
-                'images/policebharti/2.jpeg',
-                'images/policebharti/3.jpeg',
-                'images/policebharti/4.jpeg',
-                'images/policebharti/5.jpeg'
-            ];
+    document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape') {
+            if (activeDialog) closeDialog(activeDialog);
+            else closeMobileNav();
+            return;
         }
-
-        if (images.length > 0) {
-            projectModalContent.innerHTML = images.map(src => 
-                `<img src="${src}" class="project-detail-img" alt="Project Screenshot">`
-            ).join('');
-            
-            projectModal.style.display = 'flex';
-        }
+        if (!mobileNav.hidden) trapTab(event, mobileNav);
+        if (activeDialog && !activeDialog.hidden) trapTab(event, activeDialog);
     });
-});
 
-projectCloseBtn.addEventListener('click', () => {
-    projectModal.style.display = 'none';
-});
+    document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+        link.addEventListener('click', function (event) {
+            const id = link.getAttribute('href');
+            if (!id || id === '#') return;
+            const target = document.querySelector(id);
+            if (!target) return;
+            event.preventDefault();
+            closeMobileNav();
+            const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            target.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
+            if (history.replaceState) history.replaceState(null, '', id);
+        });
+    });
 
-projectModal.addEventListener('click', (e) => {
-    if (e.target === projectModal) {
-        projectModal.style.display = 'none';
+    const sectionIds = ['home', 'work', 'achievements', 'experience', 'skills', 'education', 'about', 'resume', 'contact'];
+    const navLinks = document.querySelectorAll('.nav-list a[href^="#"]');
+
+    function setActiveNav() {
+        const offset = 96;
+        let current = 'home';
+        sectionIds.forEach(function (id) {
+            const el = document.getElementById(id);
+            if (el && el.getBoundingClientRect().top - offset <= 0) current = id;
+        });
+        navLinks.forEach(function (link) {
+            const target = link.getAttribute('href').slice(1);
+            const isActive = target === current || (current === 'resume' && target === 'contact');
+            link.classList.toggle('active', isActive);
+        });
     }
-});
 
-// Fullscreen Image Modal (Achievements)
-const modal = document.getElementById('image-modal');
-const modalImg = document.getElementById('modal-image');
-const closeBtn = document.querySelector('.close-btn');
-const achievementImages = document.querySelectorAll('.achievement-img');
+    window.addEventListener('scroll', setActiveNav, { passive: true });
+    setActiveNav();
 
-achievementImages.forEach(img => {
-    img.addEventListener('click', function() {
-        modal.style.display = 'flex';
-        modalImg.src = this.src;
-    });
-});
-
-if (closeBtn) {
-    closeBtn.addEventListener('click', function() {
-        modal.style.display = 'none';
-    });
-}
-
-if (modal) {
-    modal.addEventListener('click', function(e) {
-        if (e.target === modal) {
-            modal.style.display = 'none';
-        }
-    });
-}
-
-// Dynamic Text Changing
-const dynamicText = document.getElementById('dynamic-text');
-const roles = [
-    "Chaitany Kakde",
-    "a 5x National Hackathon Winner 🏆",
-    "a 2x Ideathon Winner 💡",
-    "Technical Head @C³Cube",
-    "an Android Developer",
-    "an iOS Developer",
-    "a Full Stack Developer",
-    "a UI/UX Designer",
-    "a Unit Tester"
-];
-let index = 0;
-
-function changeText() {
-    if (dynamicText) {
-        dynamicText.style.animation = 'none';
-        void dynamicText.offsetWidth;
-        dynamicText.textContent = roles[index];
-        dynamicText.style.animation = 'fadeInOut 3s ease-in-out';
-        index = (index + 1) % roles.length;
-    }
-}
-
-changeText();
-setInterval(changeText, 3000);
-
-window.addEventListener('load', function () {
-    const loaderWrapper = document.querySelector('.loader-wrapper');
-    if (loaderWrapper) {
-        loaderWrapper.classList.add('hidden');
-        setTimeout(() => {
-            loaderWrapper.style.display = 'none';
-        }, 500);
-    }
-});
-
-// Theme Toggle Logic
-const themeToggle = document.getElementById('theme-toggle');
-const htmlElement = document.documentElement;
-const savedTheme = localStorage.getItem('theme') || 'dark';
-
-htmlElement.setAttribute('data-theme', savedTheme);
-updateThemeIcon(savedTheme);
-
-themeToggle.addEventListener('click', () => {
-    const currentTheme = htmlElement.getAttribute('data-theme');
-    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-    
-    htmlElement.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
-    updateThemeIcon(newTheme);
-});
-
-function updateThemeIcon(theme) {
-    themeToggle.textContent = theme === 'light' ? '🌙' : '☀️';
-}
+    if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+})();
